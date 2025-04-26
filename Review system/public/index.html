@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReviewHub - Product Reviews</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components/header.css">
+  <link rel="stylesheet" href="css/components/footer.css">
+  <link rel="stylesheet" href="css/components/product-card.css">
+  <link rel="stylesheet" href="css/components/review.css">
+  <link rel="stylesheet" href="css/utils/animations.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header id="main-header" class="main-header">
+    <div class="container">
+      <div class="logo">
+        <a href="/">
+          <h1>ReviewHub</h1>
+        </a>
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="/" class="active">Home</a></li>
+          <li><a href="#" id="products-link">Products</a></li>
+          <li><a href="#" id="categories-link">Categories</a></li>
+          <li><a href="#" id="about-link">About</a></li>
+        </ul>
+      </nav>
+      <div class="user-actions">
+        <div class="search-bar">
+          <input type="text" id="search-input" placeholder="Search products...">
+          <button id="search-button">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+        <div class="auth-buttons" id="auth-buttons">
+          <button id="login-button" class="btn btn-outline">Login</button>
+          <button id="register-button" class="btn btn-primary">Sign Up</button>
+        </div>
+        <div class="user-profile hidden" id="user-profile">
+          <span id="username">User</span>
+          <button id="logout-button" class="btn btn-outline">Logout</button>
+        </div>
+      </div>
+      <button class="mobile-menu-button" id="mobile-menu-button">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section id="content" class="container">
+      <!-- Dynamic content will be loaded here -->
+    </section>
+  </main>
+
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>ReviewHub</h3>
+          <p>Your trusted source for honest product reviews.</p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="#" id="footer-products">Products</a></li>
+            <li><a href="#" id="footer-categories">Categories</a></li>
+            <li><a href="#" id="footer-about">About Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <p>Email: info@reviewhub.com</p>
+          <p>Phone: (123) 456-7890</p>
+        </div>
+        <div class="footer-section">
+          <h3>Follow Us</h3>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 ReviewHub. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modals -->
+  <div id="login-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Login</h2>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" required>
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" required>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+        <p>Don't have an account? <a href="#" id="switch-to-register">Register</a></p>
+      </form>
+    </div>
+  </div>
+
+  <div id="register-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Register</h2>
+      <form id="register-form">
+        <div class="form-group">
+          <label for="register-username">Username</label>
+          <input type="text" id="register-username" required>
+        </div>
+        <div class="form-group">
+          <label for="register-email">Email</label>
+          <input type="email" id="register-email" required>
+        </div>
+        <div class="form-group">
+          <label for="register-password">Password</label>
+          <input type="password" id="register-password" required>
+        </div>
+        <div class="form-group">
+          <label for="register-confirm-password">Confirm Password</label>
+          <input type="password" id="register-confirm-password" required>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+        <p>Already have an account? <a href="#" id="switch-to-login">Login</a></p>
+      </form>
+    </div>
+  </div>
+
+  <div id="review-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Write a Review</h2>
+      <form id="review-form">
+        <input type="hidden" id="product-id">
+        <div class="form-group">
+          <label for="rating">Rating</label>
+          <div class="star-rating" id="star-rating">
+            <i class="far fa-star" data-rating="1"></i>
+            <i class="far fa-star" data-rating="2"></i>
+            <i class="far fa-star" data-rating="3"></i>
+            <i class="far fa-star" data-rating="4"></i>
+            <i class="far fa-star" data-rating="5"></i>
+          </div>
+          <input type="hidden" id="rating-value" value="0">
+        </div>
+        <div class="form-group">
+          <label for="review-title">Title</label>
+          <input type="text" id="review-title" required>
+        </div>
+        <div class="form-group">
+          <label for="review-comment">Comment</label>
+          <textarea id="review-comment" required></textarea>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Submit Review</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Templates -->
+  <template id="home-template">
+    <div class="hero-section">
+      <div class="hero-content">
+        <h1>Discover Honest Product Reviews</h1>
+        <p>Find the perfect products based on real customer experiences</p>
+        <button class="btn btn-primary btn-lg">Explore Products</button>
+      </div>
+    </div>
+    
+    <div class="featured-section">
+      <h2>Featured Products</h2>
+      <div class="products-grid" id="featured-products">
+        <!-- Products will be loaded here -->
+      </div>
+    </div>
+    
+    <div class="categories-section">
+      <h2>Shop by Category</h2>
+      <div class="categories-grid" id="categories-grid">
+        <!-- Categories will be loaded here -->
+      </div>
+    </div>
+    
+    <div class="recent-reviews-section">
+      <h2>Recent Reviews</h2>
+      <div class="reviews-list" id="recent-reviews">
+        <!-- Recent reviews will be loaded here -->
+      </div>
+    </div>
+  </template>
+
+  <template id="products-template">
+    <div class="products-header">
+      <h1>Products</h1>
+      <div class="filters">
+        <div class="category-filter">
+          <label for="category-select">Category:</label>
+          <select id="category-select">
+            <option value="">All Categories</option>
+            <!-- Categories will be loaded here -->
+          </select>
+        </div>
+        <div class="sort-filter">
+          <label for="sort-select">Sort by:</label>
+          <select id="sort-select">
+            <option value="newest">Newest</option>
+            <option value="highest-rated">Highest Rated</option>
+            <option value="lowest-rated">Lowest Rated</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    
+    <div class="products-grid" id="products-grid">
+      <!-- Products will be loaded here -->
+    </div>
+  </template>
+
+  <template id="product-detail-template">
+    <div class="product-detail">
+      <div class="product-image">
+        <img src="" alt="" id="product-detail-image">
+      </div>
+      <div class="product-info">
+        <h1 id="product-detail-name"></h1>
+        <div class="product-meta">
+          <div class="product-rating">
+            <div class="stars" id="product-detail-stars"></div>
+            <span id="product-detail-rating">0.0</span>
+            <span id="product-detail-review-count">(0 reviews)</span>
+          </div>
+          <div class="product-category" id="product-detail-category"></div>
+        </div>
+        <div class="product-price" id="product-detail-price"></div>
+        <p class="product-description" id="product-detail-description"></p>
+        <button class="btn btn-primary" id="write-review-btn">Write a Review</button>
+      </div>
+    </div>
+    
+    <div class="reviews-section">
+      <h2>Customer Reviews</h2>
+      <div class="reviews-header">
+        <div class="reviews-summary">
+          <div class="average-rating">
+            <span id="average-rating">0.0</span>
+            <div class="stars" id="average-rating-stars"></div>
+          </div>
+          <div class="rating-breakdown" id="rating-breakdown">
+            <!-- Rating breakdown will be loaded here -->
+          </div>
+        </div>
+        <div class="reviews-filter">
+          <label for="reviews-sort-select">Sort by:</label>
+          <select id="reviews-sort-select">
+            <option value="newest">Newest</option>
+            <option value="highest">Highest Rating</option>
+            <option value="lowest">Lowest Rating</option>
+          </select>
+        </div>
+      </div>
+      <div class="reviews-list" id="reviews-list">
+        <!-- Reviews will be loaded here -->
+      </div>
+    </div>
+  </template>
+
+  <template id="product-card-template">
+    <div class="product-card">
+      <div class="product-image">
+        <img src="" alt="">
+      </div>
+      <div class="product-info">
+        <h3 class="product-name"></h3>
+        <div class="product-meta">
+          <div class="product-rating">
+            <div class="stars"></div>
+            <span class="rating-value"></span>
+          </div>
+          <div class="product-category"></div>
+        </div>
+        <div class="product-price"></div>
+      </div>
+    </div>
+  </template>
+
+  <template id="review-template">
+    <div class="review">
+      <div class="review-header">
+        <div class="review-rating">
+          <div class="stars"></div>
+        </div>
+        <div class="review-title"></div>
+      </div>
+      <div class="review-meta">
+        <span class="review-author"></span>
+        <span class="review-date"></span>
+      </div>
+      <div class="review-content"></div>
+    </div>
+  </template>
+
+  <template id="category-card-template">
+    <div class="category-card">
+      <div class="category-icon">
+        <i class=""></i>
+      </div>
+      <div class="category-name"></div>
+    </div>
+  </template>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/components/product-list.js"></script>
+  <script src="js/components/product-detail.js"></script>
+  <script src="js/components/review.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
